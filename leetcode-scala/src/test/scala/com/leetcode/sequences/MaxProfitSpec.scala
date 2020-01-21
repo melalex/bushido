@@ -5,7 +5,7 @@ import com.leetcode.sequences.MaxProfit.maxProfit
 
 class MaxProfitSpec extends TestSpec {
 
-  "MaxProfit" when {
+  "Max profit" when {
     "input: [7, 1, 5, 3, 6, 4]" should {
       "return 5" in {
         maxProfit(Array(7, 1, 5, 3, 6, 4)) should be(5)

@@ -5,7 +5,7 @@ import com.leetcode.sequences.ContainsDuplicate._
 
 class ContainsDuplicateSpec extends TestSpec {
 
-  "ContainsDuplicate" when {
+  "Contains duplicate" when {
     "input: [1, 2, 3, 1]" should {
       "return true" in {
         containsDuplicate(Array(1, 2, 3, 1)) should be(true)

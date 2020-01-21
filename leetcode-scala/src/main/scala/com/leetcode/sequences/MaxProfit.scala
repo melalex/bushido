@@ -3,22 +3,20 @@ package com.leetcode.sequences
 object MaxProfit {
 
   def maxProfit(prices: Array[Int]): Int = {
+    var maxProfit = 0
+    var min = Int.MaxValue
 
-  }
-
-  private val minIndex = findIndex(_ < _)
-  private val maxIndex = findIndex(_ > _)
-
-  private def findIndex(op: (Int, Int) => Boolean)(arr: Array[Int], range: Range): Int = {
-    var curr = 0
-
-    for {
-      i <- range
-      if op(arr(i), arr(curr))
-    } {
-      curr = i
+    for (elem <- prices) {
+      if (elem < min) {
+        min = elem
+      } else {
+        val profit = elem - min
+        if (profit > maxProfit) {
+          maxProfit = profit
+        }
+      }
     }
 
-    curr
+    maxProfit
   }
 }
