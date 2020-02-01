@@ -11,19 +11,17 @@ object ValidParentheses {
   private val openedParenthesis: Set[Char] = parenthesis.keySet
   private val closedParenthesis: Set[Char] = parenthesis.values.toSet
 
+  private val EOF = '\u0000'
+
   def isValid(string: String): Boolean = {
-    def iteration(iterator: Iterator[Char], target: Char): Boolean = {
-      while (iterator.hasNext) {
-        val char = iterator.next
+    var stack = EOF :: Nil
 
-        if (openedParenthesis(char)) return iteration(iterator, parenthesis(char))
-        else if (closedParenthesis(char)) return false
-        else if (char == target) return true
-      }
-
-      false
+    for (char <- string) {
+      if (stack.head == char) stack = stack.tail
+      else if (openedParenthesis(char)) stack = parenthesis(char) :: stack
+      else if (closedParenthesis(char)) return false
     }
 
-    iteration(string.iterator, 't')
+    stack.head == EOF
   }
 }
