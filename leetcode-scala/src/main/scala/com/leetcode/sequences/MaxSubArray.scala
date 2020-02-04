@@ -3,40 +3,18 @@ package com.leetcode.sequences
 object MaxSubArray {
 
   def maxSubArray(nums: Array[Int]): Int = {
-    var leftPick = 0
-    var rightPick = 0
-    var centralValley = 0
-    var result = Int.MinValue
-    var isValley = true
-
-    for (elem <- nums) {
-      if (elem > 0) {
-        rightPick += elem
-        isValley = false
-      } else if (isValley) {
-        centralValley += elem
-        result = Math.max(elem, result)
-      } else {
-        leftPick = tryMerge(leftPick, centralValley, rightPick)
-        result = Math.max(leftPick, result)
-
-        rightPick = 0
-        centralValley = elem
-        isValley = true
-      }
+    if (nums.isEmpty) {
+      return 0
     }
 
-    if (!isValley) {
-      leftPick = tryMerge(leftPick, centralValley, rightPick)
-      result = Math.max(leftPick, result)
+    var currentSum = nums(0)
+    var bestSum = nums(0)
+
+    for (i <- 1 until nums.length) {
+      currentSum = Math.max(nums(i), currentSum + nums(i))
+      bestSum = Math.max(currentSum, bestSum)
     }
 
-    result
-  }
-
-  private def tryMerge(leftPick: Int, centralValley: Int, rightPick: Int): Int = {
-    val merged = leftPick + centralValley + rightPick
-
-    Math.max(merged, rightPick)
+    bestSum
   }
 }

@@ -17,5 +17,11 @@ class MaxSubArraySpec extends TestSpec {
         maxSubArray(Array(-1)) should be(-1)
       }
     }
+
+    "input: 1" should {
+      "return 1" in {
+        maxSubArray(Array(1)) should be(1)
+      }
+    }
   }
 }
