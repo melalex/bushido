@@ -2,67 +2,26 @@ package com.leetcode.sequences
 
 object MaximumProductSubarray {
 
-  type SliceAndNegatives = (Int, Int, Int, Int, Int)
-
   def maxProduct(nums: Array[Int]): Int = {
-    var slices = List[SliceAndNegatives]()
-    var firstNegative = Int.MaxValue
-    var lastNegative = Int.MinValue
-    var negativesCount = 0
-    var sliceStart = 0
-    var maxProduct = 1
+    var minValue = 1
+    var maxValue = 1
+    var globalMaxValue = Int.MinValue
 
-    for (i <- nums.indices) {
-      val elem = nums(i)
+    for (elem <- nums) {
+      val localMax = maxValue
 
-      maxProduct *= elem
+      maxValue = max(elem, elem * maxValue, elem * minValue)
+      minValue = min(elem, elem * localMax, elem * minValue)
 
-      if (elem < 0) {
-        negativesCount += 1
-        firstNegative = Math.min(firstNegative, i)
-        lastNegative = Math.max(lastNegative, i)
-      } else if (elem == 0) {
-        slices = (sliceStart, i, firstNegative, lastNegative, negativesCount) :: slices
-        sliceStart = i + 1
-        firstNegative = Int.MaxValue
-        lastNegative = Int.MinValue
-        negativesCount = 0
-      }
+      globalMaxValue = Math.max(globalMaxValue, maxValue)
     }
 
-    slices = (sliceStart, nums.length, firstNegative, lastNegative, negativesCount) :: slices
-
-    if (maxProduct >= 1) {
-      return maxProduct
-    }
-
-    for ((from, until, firstNeg, lastNeg, negCount) <- slices) {
-      maxProduct = Math.max(sliceMaxProduct(nums, from, until, firstNeg, lastNeg, negCount), maxProduct)
-    }
-
-    maxProduct
+    globalMaxValue
   }
 
   @inline
-  private def sliceMaxProduct(nums: Array[Int], first: Int, last: Int, firstNeg: Int, lastNeg: Int, negCount: Int): Int = {
-    if (negCount % 2 == 0) product(nums, first until last)
-    else Math.max(
-      product(nums, first until lastNeg),
-      product(nums, firstNeg + 1 until last)
-    )
-  }
+  def max(a: Int, b: Int, c: Int): Int = Math.max(Math.max(a, b), c)
 
-  private def product(nums: Array[Int], range: Range): Int = {
-    if (range.isEmpty) {
-      return Int.MinValue
-    }
-
-    var result = 1
-
-    for (i <- range) {
-      result = nums(i) * result
-    }
-
-    result
-  }
+  @inline
+  def min(a: Int, b: Int, c: Int): Int = Math.min(Math.min(a, b), c)
 }
