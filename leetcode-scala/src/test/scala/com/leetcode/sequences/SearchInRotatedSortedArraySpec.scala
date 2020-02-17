@@ -18,11 +18,27 @@ class SearchInRotatedSortedArraySpec extends TestSpec {
       "return -1" in {
         search(Array(4, 5, 6, 7, 0, 1, 2), 3) should be(-1)
       }
+
+      "return 6" in {
+        search(Array(4, 5, 6, 7, 0, 1, 2), 2) should be(6)
+      }
     }
 
     "input: [1]" should {
       "return -1" in {
         search(Array(1), 0) should be(-1)
+      }
+    }
+
+    "input: []" should {
+      "return -1" in {
+        search(Array(), 5) should be(-1)
+      }
+    }
+
+    "input: [3, 5, 1]" should {
+      "return 0" in {
+        search(Array(3, 5, 1), 3) should be(0)
       }
     }
   }
