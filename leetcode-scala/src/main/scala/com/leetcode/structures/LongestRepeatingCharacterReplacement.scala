@@ -2,57 +2,29 @@ package com.leetcode.structures
 
 object LongestRepeatingCharacterReplacement {
 
-  import scala.collection.mutable
-
   def characterReplacement(s: String, k: Int): Int = {
-    val map = mutable.Map[Char, mutable.Buffer[CharRange]]()
-      .withDefault(_ => mutable.Buffer[CharRange]())
 
-    var i = 0
-    while (i < s.length) {
-      val char = s(i)
-      val buffer = map(char)
+    def pos(i: Int): Int = s(i) - 'A'
 
-      if (buffer.isEmpty || buffer.last.to != i) {
-        buffer.append(CharRange(i, i + 1))
-      } else {
-        buffer.last.to = i + 1
+    val chars = Array.ofDim[Int](26)
+    var left = 0
+    var right = 0
+    var maxCount = 0
+    var maxLength = 0
+
+    while (right < s.length) {
+      chars(pos(right)) += 1
+      maxCount = Math.max(maxCount, chars(pos(right)))
+
+      while (right - left + 1 - maxCount > k) {
+        chars(pos(left)) -= 1
+        left += 1
       }
 
-      i += 1
+      maxLength = Math.max(maxLength, right - left + 1)
+      right += 1
     }
 
-    var max = 0
-    var lastCovered = 0
-
-    for ((_, buffer) <- map) {
-      var i = 0
-      while (i < buffer.length) {
-        val range = buffer(i)
-
-        var left = 0
-        var right = 0
-
-        if (lastCovered < range.from) {
-
-        }
-
-        if (lastCovered < range.to) {
-
-        }
-
-        max = Math.max(left + right + range.length, max)
-
-        i += 1
-      }
-    }
-
-    max
+    maxLength
   }
-
-  case class CharRange(from: Int, var to: Int) {
-
-    def length: Int = to - from
-  }
-
 }
