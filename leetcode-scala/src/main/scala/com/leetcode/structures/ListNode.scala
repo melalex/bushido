@@ -43,16 +43,20 @@ object ListNode {
   }
 
   def removeNthFromEnd(head: ListNode, n: Int): ListNode = {
-    val len = count(head)
-    val pos = len - n - 1
 
-    if (pos >= 0 && pos < len - 1) {
-      val target = get(head, pos)
-      target.next = target.next.next
-    }
+    @scala.annotation.tailrec
+    def iter(head: ListNode, nth: ListNode): Unit =
+      if (nth == null) head.next = head.next.next
+      else iter(head.next, nth.next)
 
-    if (pos == -1) head.next
-    else head
+    val dummy = new ListNode(0)
+    dummy.next = head
+
+    val nth = get(dummy, n + 1)
+
+    iter(dummy, nth)
+
+    dummy.next
   }
 
   def toList(listNode: ListNode): List[Int] =
