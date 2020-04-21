@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
 import com.leetcode.TestSpec
-import com.leetcode.nonlinear.TreeNode.isValidBST
+import com.leetcode.nonlinear.TreeNode.{invertTree, isValidBST}
 
 class TreeNodeSpec extends TestSpec {
 
@@ -44,6 +44,21 @@ class TreeNodeSpec extends TestSpec {
         root.right = one
 
         isValidBST(root) should be(false)
+      }
+    }
+  }
+
+  "invertTree" when {
+    "input some tree" should {
+      "return some response" in {
+        val root = new TreeNode(2)
+        val left = new TreeNode(1)
+        val right = new TreeNode(3)
+
+        root.left = left
+        root.right = right
+
+        invertTree(root) should not be null
       }
     }
   }
