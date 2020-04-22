@@ -55,5 +55,17 @@ class NonOverlappingIntervalsSpec extends TestSpec {
         eraseOverlapIntervals(Array(Array(0, 2), Array(1, 3), Array(1, 3), Array(2, 4), Array(3, 5), Array(3, 5), Array(4, 6))) should be(4)
       }
     }
+
+    "input [[0,2],[2,4],[1,3],[1,3],[3,5],[3,5],[4,6]]" should {
+      "return 4" in {
+        eraseOverlapIntervals(Array(Array(0, 2), Array(2, 4), Array(1, 3), Array(1, 3), Array(3, 5), Array(3, 5), Array(4, 6))) should be(4)
+      }
+    }
+
+    "input [[0,2],[1,3],[1,3],[3,5],[3,5],[2,4],[4,6]]" should {
+      "return 4" in {
+        eraseOverlapIntervals(Array(Array(0, 2), Array(1, 3), Array(1, 3), Array(3, 5), Array(3, 5), Array(2, 4), Array(4, 6))) should be(4)
+      }
+    }
   }
 }
