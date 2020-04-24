@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
 import com.leetcode.TestSpec
-import com.leetcode.nonlinear.TreeNode.{deserialize, invertTree, isValidBST, serialize}
+import com.leetcode.nonlinear.TreeNode.{buildTree, deserialize, invertTree, isValidBST, serialize}
 
 class TreeNodeSpec extends TestSpec {
 
@@ -87,6 +87,26 @@ class TreeNodeSpec extends TestSpec {
     "input null" should {
       "return expected result" in {
         deserialize(serialize(null)) should be(null)
+      }
+    }
+  }
+
+  "buildTree" when {
+    "right oriented input" should {
+      "return 3,9,20,?,?,15,7" in {
+        serialize(buildTree(Array(3, 9, 20, 15, 7), Array(9, 3, 15, 20, 7))) should be("3,9,20,?,?,15,7")
+      }
+    }
+
+    "empty input" should {
+      "return null" in {
+        buildTree(Array(), Array()) should be(null)
+      }
+    }
+
+    "input [1,2,3] [3,2,1]" should {
+      "return 1,2,?,3" in {
+        serialize(buildTree(Array(1,2,3), Array(3,2,1))) should be("1,2,?,3")
       }
     }
   }

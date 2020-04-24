@@ -90,6 +90,25 @@ object TreeNode {
 
     root
   }
+
+  def buildTree(preorder: Array[Int], inorder: Array[Int]): TreeNode = {
+    val inorderMap = inorder.zipWithIndex.toMap
+
+    def construct(preStart: Int, preEnd: Int, inStart: Int, inEnd: Int): TreeNode =
+      if (preStart > preEnd || inStart > inEnd) null
+      else {
+        val preIndex = preorder(preStart)
+        val node = new TreeNode(preIndex)
+        val inIndex = inorderMap(preIndex)
+
+        node.left = construct(preStart + 1, preStart + (inIndex - inStart), inStart, inIndex - 1)
+        node.right = construct(preStart + (inIndex - inStart) + 1, preEnd, inIndex + 1, inEnd)
+
+        node
+      }
+
+    construct(0, preorder.length - 1, 0, inorder.length - 1)
+  }
 }
 
 class TreeNode(var _value: Int) {
