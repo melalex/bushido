@@ -141,6 +141,17 @@ object TreeNode {
 
     dfs(root, 0)
   }
+
+  def isSameTree(p: TreeNode, q: TreeNode): Boolean = {
+    def getVal(node: TreeNode): Integer = if (node == null) null else node.value
+
+    def dfs(first: TreeNode, second: TreeNode): Boolean =
+      if (getVal(first) != getVal(second)) false
+      else if (first == null) true
+      else dfs(first.left, second.left) && dfs(first.right, second.right)
+
+    dfs(p, q)
+  }
 }
 
 class TreeNode(var _value: Int) {
