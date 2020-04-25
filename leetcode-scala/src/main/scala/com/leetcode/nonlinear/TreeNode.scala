@@ -138,6 +138,19 @@ object TreeNode {
 
     max
   }
+
+  def maxDepth(root: TreeNode): Int = {
+    def dfs(node: TreeNode, depth: Int): Int =
+      if (node == null) depth
+      else {
+        val left = dfs(node.left, depth + 1)
+        val right = dfs(node.right, depth + 1)
+
+        Math.max(left, right)
+      }
+
+    dfs(root, 0)
+  }
 }
 
 class TreeNode(var _value: Int) {
