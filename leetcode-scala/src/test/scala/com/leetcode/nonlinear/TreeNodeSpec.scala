@@ -153,11 +153,5 @@ class TreeNodeSpec extends TestSpec {
         maxPathSum(deserialize("-2,6,?,0,-6")) should be(6)
       }
     }
-
-    "input null" should {
-      "return 0" in {
-        maxPathSum(null) should be(0)
-      }
-    }
   }
 }
