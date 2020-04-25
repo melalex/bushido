@@ -152,6 +152,22 @@ object TreeNode {
 
     dfs(p, q)
   }
+
+  def levelOrder(root: TreeNode): List[List[Int]] = {
+    val result = collection.mutable.LinkedHashMap[Int, List[Int]]().withDefaultValue(List())
+
+    def dfs(node: TreeNode, depth: Int): Unit =
+      if (node != null) {
+        result(depth) = node.value :: result(depth)
+
+        dfs(node.right, depth + 1)
+        dfs(node.left, depth + 1)
+      }
+
+    dfs(root, 0)
+
+    result.values.toList
+  }
 }
 
 class TreeNode(var _value: Int) {
