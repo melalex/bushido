@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
 import com.leetcode.TestSpec
-import com.leetcode.nonlinear.TreeNode.{buildTree, deserialize, invertTree, isValidBST, serialize}
+import com.leetcode.nonlinear.TreeNode.{buildTree, deserialize, invertTree, isValidBST, maxPathSum, serialize}
 
 class TreeNodeSpec extends TestSpec {
 
@@ -106,7 +106,57 @@ class TreeNodeSpec extends TestSpec {
 
     "input [1,2,3] [3,2,1]" should {
       "return 1,2,?,3" in {
-        serialize(buildTree(Array(1,2,3), Array(3,2,1))) should be("1,2,?,3")
+        serialize(buildTree(Array(1, 2, 3), Array(3, 2, 1))) should be("1,2,?,3")
+      }
+    }
+  }
+
+  "maxPathSum" when {
+    "input 1,2,3" should {
+      "return 6" in {
+        maxPathSum(deserialize("1,2,3")) should be(6)
+      }
+    }
+
+    "input -10,9,20,?,?,15,7" should {
+      "return 42" in {
+        maxPathSum(deserialize("-10,9,20,?,?,15,7")) should be(42)
+      }
+    }
+
+    "input -3" should {
+      "return -3" in {
+        maxPathSum(deserialize("-3")) should be(-3)
+      }
+    }
+
+    "input 1,2" should {
+      "return 3" in {
+        maxPathSum(deserialize("1,2")) should be(3)
+      }
+    }
+
+    "input 2,-1" should {
+      "return 2" in {
+        maxPathSum(deserialize("2,-1")) should be(2)
+      }
+    }
+
+    "input 1,-2,3" should {
+      "return 4" in {
+        maxPathSum(deserialize("1,-2,3")) should be(4)
+      }
+    }
+
+    "input -2,6,?,0,-6" should {
+      "return 6" in {
+        maxPathSum(deserialize("-2,6,?,0,-6")) should be(6)
+      }
+    }
+
+    "input null" should {
+      "return 0" in {
+        maxPathSum(null) should be(0)
       }
     }
   }

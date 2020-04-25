@@ -109,6 +109,35 @@ object TreeNode {
 
     construct(0, preorder.length - 1, 0, inorder.length - 1)
   }
+
+  def maxPathSum(root: TreeNode): Integer = {
+    if (root == null) {
+      return 0
+    }
+
+    var max = root.value
+
+    @inline
+    def max3(a: Int, b: Int, c: Int): Int = Math.max(Math.max(a, b), c)
+
+    @inline
+    def max5(a: Int, b: Int, c: Int, d: Int, e: Int): Int = Math.max(Math.max(Math.max(Math.max(a, b), c), d), e)
+
+    def calculateMax(node: TreeNode): Int =
+      if (node == null) 0
+      else {
+        val left = calculateMax(node.left)
+        val right = calculateMax(node.right)
+
+        max = max5(max, left + right + node.value, left + node.value, right + node.value, node.value)
+
+        max3(left + node.value, right + node.value, node.value)
+      }
+
+    calculateMax(root)
+
+    max
+  }
 }
 
 class TreeNode(var _value: Int) {
