@@ -186,26 +186,28 @@ object TreeNode {
   }
 
   def kthSmallest(root: TreeNode, k: Int): Int = {
-    var result = root.value
+    var stack = List[TreeNode]()
+    var node = root
+    var i = k
 
-    def dfs(node: TreeNode, i: Int): Int =
-      if (node == null) i
-      else if (i >= k) i
-      else {
-        val left = dfs(node.left, i) + 1
-
-        if (left == k) {
-          result = node.value
-        }
-
-        val right = dfs(node.right, left)
-
-        right
+    while (true) {
+      while (node != null) {
+        stack = node :: stack
+        node = node.left
       }
 
-    dfs(root, 0)
+      val head :: tail = stack
 
-    result
+      stack = tail
+
+      i -= 1
+
+      if (i == 0) return head.value
+
+      node = head.right
+    }
+
+    throw new IndexOutOfBoundsException
   }
 }
 
