@@ -168,6 +168,23 @@ object TreeNode {
 
     result.values.toList
   }
+
+  def isSubtree(s: TreeNode, t: TreeNode): Boolean = {
+
+    def getVal(node: TreeNode): Integer = if (node == null) null else node.value
+
+    def find(node: TreeNode): Boolean =
+      if (node == null) false
+      else isSameTree(node, t) || find(node.left) || find(node.right)
+
+    def isSameTree(first: TreeNode, second: TreeNode): Boolean =
+      if (getVal(first) != getVal(second)) false
+      else if (first == null) true
+      else isSameTree(first.left, second.left) && isSameTree(first.right, second.right)
+
+    find(s)
+  }
+
 }
 
 class TreeNode(var _value: Int) {
