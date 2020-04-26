@@ -71,16 +71,22 @@ object ListNode {
 
   def mergeKLists(lists: Array[ListNode]): ListNode = {
     val zero = new ListNode()
+    val queue = collection.mutable.PriorityQueue.empty[ListNode](Ordering.by[ListNode, Int](_.x).reverse)
     var last = zero
 
-    while (lists.exists(_ != null)) {
-      val i = lists.indexOf(lists.minBy(n => if (n == null) Int.MaxValue else n.x))
-      val node = lists(i)
+    for (list <- lists; if list != null) {
+      queue += list
+    }
+
+    while (queue.nonEmpty) {
+      val node = queue.dequeue()
 
       last.next = node
       last = node
 
-      lists(i) = node.next
+      if (node.next != null) {
+        queue += node.next
+      }
     }
 
     zero.next
