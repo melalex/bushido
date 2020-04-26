@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.ListNode.{hasCycle, removeNthFromEnd, toList}
+import com.leetcode.structures.ListNode.{hasCycle, mergeKLists, removeNthFromEnd, toList}
 
 class ListNodeSpec extends TestSpec {
 
@@ -41,6 +41,16 @@ class ListNodeSpec extends TestSpec {
 
       "return head" in {
         toList(removeNthFromEnd(ListNode(1, 2), 1)) should be(toList(ListNode(1)))
+      }
+    }
+
+    "mergeKLists" should {
+      "return expected result" in {
+        toList(mergeKLists(Array(ListNode(1, 4, 5), ListNode(1, 3, 4), ListNode(2, 6)))) should be(List(1, 1, 2, 3, 4, 4, 5, 6))
+      }
+
+      "return null" in {
+        mergeKLists(Array()) should be(null)
       }
     }
   }

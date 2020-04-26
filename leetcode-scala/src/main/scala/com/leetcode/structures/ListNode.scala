@@ -68,9 +68,26 @@ object ListNode {
     result.next = acc
     result
   }
+
+  def mergeKLists(lists: Array[ListNode]): ListNode = {
+    val zero = new ListNode()
+    var last = zero
+
+    while (lists.exists(_ != null)) {
+      val i = lists.indexOf(lists.minBy(n => if (n == null) Int.MaxValue else n.x))
+      val node = lists(i)
+
+      last.next = node
+      last = node
+
+      lists(i) = node.next
+    }
+
+    zero.next
+  }
 }
 
 case class ListNode(var _x: Int = 0) {
-  var next: ListNode = null
+  var next: ListNode = _
   var x: Int = _x
 }
