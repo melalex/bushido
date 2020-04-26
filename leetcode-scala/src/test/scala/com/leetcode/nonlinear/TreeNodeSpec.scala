@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
 import com.leetcode.TestSpec
-import com.leetcode.nonlinear.TreeNode.{buildTree, deserialize, invertTree, isValidBST, levelOrder, maxPathSum, serialize}
+import com.leetcode.nonlinear.TreeNode.{buildTree, deserialize, invertTree, isValidBST, kthSmallest, levelOrder, maxPathSum, serialize}
 
 class TreeNodeSpec extends TestSpec {
 
@@ -159,6 +159,26 @@ class TreeNodeSpec extends TestSpec {
     "input 3,9,20,?,?,15,7" should {
       "return expected result" in {
         levelOrder(deserialize("3,9,20,?,?,15,7")) should be(List(List(3), List(9, 20), List(15, 7)))
+      }
+    }
+  }
+
+  "kthSmallest" when {
+    "input root = [3,1,4,?,2], k = 1" should {
+      "return 1" in {
+        kthSmallest(deserialize("3,1,4,?,2"), 1) should be(1)
+      }
+    }
+
+    "input root = [5,3,6,2,4,?,?,1], k = 3" should {
+      "return 3" in {
+        kthSmallest(deserialize("5,3,6,2,4,?,?,1"), 3) should be(3)
+      }
+    }
+
+    "input root = [1], k = 1" should {
+      "return 1" in {
+        kthSmallest(deserialize("1"), 1) should be(1)
       }
     }
   }

@@ -185,6 +185,28 @@ object TreeNode {
     find(s)
   }
 
+  def kthSmallest(root: TreeNode, k: Int): Int = {
+    var result = root.value
+
+    def dfs(node: TreeNode, i: Int): Int =
+      if (node == null) i
+      else if (i >= k) i
+      else {
+        val left = dfs(node.left, i) + 1
+
+        if (left == k) {
+          result = node.value
+        }
+
+        val right = dfs(node.right, left)
+
+        right
+      }
+
+    dfs(root, 0)
+
+    result
+  }
 }
 
 class TreeNode(var _value: Int) {
