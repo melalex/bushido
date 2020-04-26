@@ -209,6 +209,20 @@ object TreeNode {
 
     throw new IndexOutOfBoundsException
   }
+
+  def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode): TreeNode = {
+    val pVal = p.value
+    val qVal = q.value
+
+    @scala.annotation.tailrec
+    def dfs(node: TreeNode): TreeNode =
+      if (node == null) null
+      else if (node.value > pVal && node.value > qVal) dfs(node.left)
+      else if (node.value < pVal && node.value < qVal) dfs(node.right)
+      else node
+
+    dfs(root)
+  }
 }
 
 class TreeNode(var _value: Int) {
