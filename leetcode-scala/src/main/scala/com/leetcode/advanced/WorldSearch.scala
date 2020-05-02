@@ -14,7 +14,7 @@ object WorldSearch {
       if (i < 0 || i >= board.length || j < 0 || j >= board(i).length || visited((i, j))) Nil
       else trie(board(i)(j)) match {
         case Leaf => Nil
-        case node: Word => node.word :: dfs(i, j, node, visited + ((i, j)))
+        case node: Node if node.last => node.word :: dfs(i, j, node, visited + ((i, j)))
         case node: Node => dfs(i, j, node, visited + ((i, j)))
       }
 
@@ -45,29 +45,24 @@ object WorldSearch {
 
     @scala.annotation.tailrec
     def add(target: Node, word: String, pos: Int = 0): Unit =
-      if (pos == word.length - 1) target.withWordChild(word(pos), word)
+      if (pos == word.length - 1) target.setWordChild(word(pos), word)
       else add(target.withNodeChild(word(pos)), word, pos + 1)
   }
 
-  trait Trie {
+  trait Trie
 
-    def children: Array[Trie]
-  }
+  object Leaf extends Trie
 
-  object Leaf extends Trie {
+  case class Node(var word: String = null, var last: Boolean = false) extends Trie {
 
-    override def children: Array[Trie] = Array.fill(26)(Leaf)
-  }
-
-  case class Node(children: Array[Trie] = Array.fill(26)(Leaf)) extends Trie {
+    private val children: Array[Trie] = Array.fill(26)(Leaf)
 
     def apply(char: Char): Trie = children(index(char))
 
     def withNodeChild(char: Char): Node = {
       val i = index(char)
-      val trie = children(i)
 
-      trie match {
+      children(i) match {
         case Leaf =>
           val node = Node()
           children(i) = node
@@ -76,19 +71,18 @@ object WorldSearch {
       }
     }
 
-    def withWordChild(char: Char, word: String): Word = {
+    def setWordChild(char: Char, word: String): Unit = {
       val i = index(char)
-      val oldNode = children(i)
-      val newNode = new Word(word, oldNode.children)
 
-      children(i) = newNode
-
-      newNode
+      children(i) match {
+        case Leaf => children(i) = Node(word, last = true)
+        case node: Node =>
+          node.word = word
+          node.last = true
+      }
     }
 
     private def index(ch: Char) = ch - 'a'
   }
-
-  class Word(val word: String, tries: Array[Trie]) extends Node(tries)
 
 }
