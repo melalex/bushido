@@ -17,5 +17,17 @@ class LengthOfLISSpec extends TestSpec {
         lengthOfLIS(Array(10, 9, 2, 5, 3, 7, 101, 18)) should be(4)
       }
     }
+
+    "input [10,9,2,5,3,4]" should {
+      "return 3" in {
+        lengthOfLIS(Array(10,9,2,5,3,4)) should be(3)
+      }
+    }
+
+    "input [2,2]" should {
+      "return 1" in {
+        lengthOfLIS(Array(2, 2)) should be(1)
+      }
+    }
   }
 }
