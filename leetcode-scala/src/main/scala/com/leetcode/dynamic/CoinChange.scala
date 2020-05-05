@@ -3,34 +3,35 @@ package com.leetcode.dynamic
 object CoinChange {
 
   def coinChange(coins: Array[Int], amount: Int): Int = {
-    if (amount == 0) {
-      return 0
-    }
 
-    val queue = collection.mutable.PriorityQueue[(List[Int], Int, Int)]((coins.toList, amount, 1))(Ordering.by[(List[Int], Int, Int), Int](_._3).reverse)
-    val visited = collection.mutable.Set[(List[Int], Int)]()
+    val cache = collection.mutable.Map[Int, Integer]()
 
-    while (queue.nonEmpty) {
-      val (currCoins, currAmount, acc) = queue.dequeue()
-      val restTails = currCoins.tail
+    def min(a: Integer, b: Integer): Integer =
+      if (a != null && b != null && a >= 0 && b >= 0) Math.min(a, b)
+      else if (a != null && a >= 0) a
+      else if (b != null && b >= 0) b
+      else null
 
-      if (currCoins.size > 1 && !visited((restTails, currAmount))) {
-        queue.addOne((restTails, currAmount, acc))
-        visited.add((restTails, currAmount))
+    def first(a: Integer, b: Integer): Integer =
+      if (a == null) b else a
+
+    def inc(a: Integer): Integer = if (a == null) null else a + 1
+
+    def inner(amount: Int): Integer =
+      if (amount == 0) 0
+      else if (amount < 0) null
+      else if (cache.contains(amount - 1)) cache(amount - 1)
+      else {
+        var res: Integer = null
+
+        for (coin <- coins) {
+          res = min(inc(inner(amount - coin)), res)
+        }
+
+        cache(amount - 1) = res
+        cache(amount - 1)
       }
 
-      val newAmount = currAmount - currCoins.head
-
-      if (newAmount == 0) {
-        return acc
-      }
-
-      if (newAmount > 0 && !visited((currCoins, newAmount))) {
-        queue.addOne((currCoins, newAmount, acc + 1))
-        visited.add((currCoins, newAmount))
-      }
-    }
-
-    -1
+    first(inner(amount), -1)
   }
 }
