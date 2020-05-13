@@ -9,7 +9,7 @@ object UniquePaths {
 
     for (i <- 0 until n) {
       for (j <- 0 until m) {
-        if (i != 0 || j !=0 ) {
+        if (i != 0 || j != 0) {
           dp(i, j) = dp(i - 1, j) + dp(i, j - 1)
         }
       }
