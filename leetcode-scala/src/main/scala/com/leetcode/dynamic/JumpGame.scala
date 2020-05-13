@@ -5,21 +5,20 @@ object JumpGame {
   def canJump(nums: Array[Int]): Boolean = {
     val visited = new Array[Boolean](nums.length)
 
-    def iter(i: Int): Boolean =
-      if (i == nums.length - 1) true
-      else if (i >= nums.length || visited(i) || nums(i) == 0) false
-      else {
-        visited(i) = true
+    visited(nums.length - 1) = true
 
-        for (step <- (i to Math.min(i + nums(i), nums.length - 1)).reverse) {
-          if (iter(step)) {
-            return true
-          }
+    for (i <- (nums.length - 1) to 0 by -1) {
+      var j = Math.min(i + nums(i), nums.length - 1)
+
+      while (!visited(i) && j >= i) {
+        if (visited(j)) {
+          visited(i) = true
         }
 
-        false
+        j -= 1
       }
+    }
 
-    iter(0)
+    visited.head
   }
 }
