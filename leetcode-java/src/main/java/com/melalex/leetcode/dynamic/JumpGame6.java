@@ -1,4 +1,4 @@
-package com.melalex.leetcode.greedy;
+package com.melalex.leetcode.dynamic;
 
 import java.util.PriorityQueue;
 
