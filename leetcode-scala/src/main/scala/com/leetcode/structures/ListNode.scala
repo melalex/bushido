@@ -91,9 +91,31 @@ object ListNode {
 
     zero.next
   }
+
+  def addTwoNumbers(l1: ListNode, l2: ListNode): ListNode = {
+    def next(node: ListNode) =
+      if (node == null) null
+      else node.next
+
+    def value(node: ListNode) =
+      if (node == null) 0
+      else node.x
+
+    def iter(l1: ListNode, l2: ListNode, remaining: Int): ListNode = {
+      if (l1 == null && l2 == null && remaining == 0) null
+      else if (l1 == null && l2 == null) new ListNode(remaining)
+      else {
+        val sum = value(l1) + value(l2) + remaining
+
+        new ListNode(sum % 10, iter(next(l1), next(l2), sum / 10))
+      }
+    }
+
+    iter(l1, l2, 0)
+  }
 }
 
-case class ListNode(var _x: Int = 0) {
-  var next: ListNode = _
+class ListNode(_x: Int = 0, _next: ListNode = null) {
+  var next: ListNode = _next
   var x: Int = _x
 }
