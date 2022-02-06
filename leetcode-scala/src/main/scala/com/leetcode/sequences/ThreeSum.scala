@@ -7,21 +7,20 @@ object ThreeSum {
       .map { case (n, i) => n -> i }
       .toMap
 
-    nums.to(LazyList)
-      .zipWithIndex
-      .map { case (value, index) => (0 - value, index) }
-      .flatMap {
-        case (target, valIndex) =>
-          nums.to(LazyList)
-            .zipWithIndex
-            .filter { case (elem, _) => mapping.contains(target - elem) }
-            .map { case (elem, index) => (index, mapping(target - elem))}
-            .filterNot { case (left, right) => left == right }
-            .filterNot { case (left, _) => left == valIndex }
-            .filterNot { case (_, right) => right == valIndex }
-            .map { case (left, right) => List(nums(valIndex), nums(left), nums(right)) }
+    val resultBuilder = scala.collection.mutable.Set[List[Int]]()
+
+    for (i <- nums.indices) {
+      for (j <- i + 1 until nums.length) {
+        val subSum = -(nums(i) + nums(j))
+        if (mapping.contains(subSum)) {
+          val thirdIndex = mapping(subSum)
+          if (thirdIndex != i && thirdIndex != j) {
+            resultBuilder += List(nums(i), nums(j), subSum).sorted
+          }
+        }
       }
-      .distinctBy(_.toSet)
-      .toList
+    }
+
+    resultBuilder.toList
   }
 }
