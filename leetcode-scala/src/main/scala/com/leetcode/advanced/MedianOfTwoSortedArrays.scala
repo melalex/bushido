@@ -2,41 +2,35 @@ package com.leetcode.advanced
 
 object MedianOfTwoSortedArrays {
 
-  def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {
-    def getValue(nums: Array[Int], i: Int) =
-      if (i >= nums.length) Int.MaxValue
-      else if (i < 0) Int.MinValue
-      else nums(i)
+  def findMedianSortedArrays(num1: Array[Int], num2: Array[Int]): Double = {
+    val (aNum, bNum) = if (num1.length > num2.length) (num2, num1) else (num1, num2)
 
-    val (numsA, numsB) =
-      if (nums1.length >= nums2.length) (nums1, nums2)
-      else (nums2, nums1)
+    val totalLen = aNum.length + bNum.length
+    val isTotalLenEven = totalLen % 2 == 0
+    val half = totalLen / 2
 
-    val totalLength = numsA.length + numsB.length
-    val halfLength = totalLength / 2
-    var l = 0
-    var r = numsA.length - 1
+    def getVal(arr: Array[Int], i: Int): Int =
+      if (i < 0) Int.MinValue
+      else if (i >= arr.length) Int.MaxValue
+      else arr(i)
 
-    while (true) {
-      val i = (l + r) / 2
-      val j = halfLength - i - 2
+    @scala.annotation.tailrec
+    def iter(left: Int, right: Int): Double = {
+      val aPointer = math.floor((left + right).toDouble / 2).toInt
+      val bPointer = half - aPointer - 2
 
-      val aLeft = getValue(numsA, i)
-      val aRight = getValue(numsA, i + 1)
-      val bLeft = getValue(numsB, j)
-      val bRight = getValue(numsB, j + 1)
+      val aLeft = getVal(aNum, aPointer)
+      val aRight = getVal(aNum, aPointer + 1)
+      val bLeft = getVal(bNum, bPointer)
+      val bRight = getVal(bNum, bPointer + 1)
 
-      if (aLeft <= bRight && bLeft <= aRight) {
-        return if (totalLength % 2 != 0) Math.min(aRight, bRight)
-        else (Math.max(aLeft, bLeft) + Math.min(aRight, bRight)).toDouble / 2
-      } else if (aLeft > bRight) {
-        r = i - 1
-      } else {
-        l = i + 1
-      }
+      if (aLeft > bRight) iter(left, aPointer - 1)
+      else if (bLeft > aRight) iter(aPointer + 1, right)
+      else if (isTotalLenEven) (Math.max(aLeft, bLeft) + Math.min(aRight, bRight)).toDouble / 2
+      else Math.min(aRight, bRight).toDouble
     }
 
-    throw new IllegalArgumentException
+    iter(0, aNum.length - 1)
   }
 
   def main(args: Array[String]): Unit = {
@@ -46,5 +40,6 @@ object MedianOfTwoSortedArrays {
     println(findMedianSortedArrays(Array(), Array(1)))
     println(findMedianSortedArrays(Array(), Array(2, 3)))
     println(findMedianSortedArrays(Array(3), Array(-2, -1)))
+    println(findMedianSortedArrays(Array(5, 6), Array(1, 2, 3, 4, 7, 8)))
   }
 }
