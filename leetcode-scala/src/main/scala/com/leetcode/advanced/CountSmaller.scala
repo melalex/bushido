@@ -4,65 +4,45 @@ import scala.annotation.tailrec
 
 object CountSmaller {
 
-//  case class Tree(
-//                   var left: Tree,
-//                   var right: Tree,
-//                   index: Int,
-//                 )
-//
-//  def countSmaller(nums: Array[Int]): List[Int] = {
-//    if (nums.isEmpty) {
-//      return List.empty
-//    }
-//
-//    val result = Array.ofDim[Int](nums.length)
-//
-//    @tailrec
-//    def addToTree(currentNode: Tree, i: Int, value: Int): Unit =
-//      if (nums(currentNode.index) > value) {
-//        result(currentNode.index) += 1
-//        increment(currentNode.right)
-//
-//        if (currentNode.left != null) {
-//          addToTree(currentNode.left, i, value)
-//        } else {
-//          currentNode.left = Tree(null, null, i)
-//        }
-//      } else if (currentNode.right != null) {
-//        addToTree(currentNode.right, i, value)
-//      } else {
-//        currentNode.right = Tree(null, null, i)
-//      }
-//
-//    def increment(tree: Tree): Unit =
-//      if (tree == null) ()
-//      else {
-//        result(tree.index) += 1
-//
-//        increment(tree.left)
-//        increment(tree.right)
-//      }
-//
-//    val root = Tree(null, null, 0)
-//
-//    for (i <- 1 until nums.length) {
-//      addToTree(root, i, nums(i))
-//    }
-//
-//    result.toList
-//  }
+  case class Tree(
+                   value: Int,
+                   var left: Tree = null,
+                   var right: Tree = null,
+                   var height: Int = 1,
+                 )
 
   def countSmaller(nums: Array[Int]): List[Int] = {
-    val valToIndex = nums.zipWithIndex.groupMap(_._1)(_._2)
+    @tailrec
+    def addToTree(tree: Tree, value: Int, acc: Int): Int = {
+      tree.height += 1
+      if (value > tree.value) {
+        val newAcc = acc + 1 + (if(tree.left != null) tree.left.height else 0)
+        if (tree.right == null) {
+          tree.right = Tree(value)
+          newAcc
+        }
+        else addToTree(tree.right, value, newAcc)
+      }
+      else if (tree.left == null) {
+        tree.left = Tree(value)
+        acc
+      }
+      else addToTree(tree.left, value, acc)
+    }
 
-    val sorted = nums.sorted
-    var result = List[Int]()
+    if (nums.isEmpty) {
+      return Nil
+    }
 
+    val root = Tree(nums(nums.length - 1))
+    var result = 0 :: Nil
 
+    for (i <- nums.length - 2 to 0 by -1) {
+      result = addToTree(root, nums(i), 0) :: result
+    }
 
     result
   }
-
 
   def main(args: Array[String]): Unit = {
     println(countSmaller(Array(5, 2, 6, 1)))
