@@ -1,7 +1,9 @@
 package com.melalex.leetcode.datastructures;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
 public class CountSmaller {
 
@@ -29,19 +31,40 @@ public class CountSmaller {
       return List.of();
     }
 
-    var root = new Tree(nums[nums.length - 1]);
+    var visited = new TreeSet<Integer>();
     var result = new ArrayList<Integer>(nums.length);
 
     for (int i = 0; i < nums.length; i++) {
       result.add(0);
     }
 
-    for (int i = nums.length - 2; i >= 0; i--) {
-      result.set(i, addToTree(root, nums[i], 0));
+    for (int i = nums.length - 1; i >= 0; i--) {
+      var value = nums[i];
+      result.set(i,  visited.headSet(value, false).size());
+      visited.add(value);
     }
 
     return result;
   }
+
+//  public List<Integer> countSmaller(int[] nums) {
+//    if (nums.length == 0) {
+//      return List.of();
+//    }
+//
+//    var root = new Tree(nums[nums.length - 1]);
+//    var result = new ArrayList<Integer>(nums.length);
+//
+//    for (int i = 0; i < nums.length; i++) {
+//      result.add(0);
+//    }
+//
+//    for (int i = nums.length - 2; i >= 0; i--) {
+//      result.set(i, addToTree(root, nums[i], 0));
+//    }
+//
+//    return result;
+//  }
 
   private int addToTree(Tree tree, int value, int acc) {
     tree.height++;
