@@ -18,7 +18,7 @@ public class LargestRectangleArea {
         }
 
         while (!stack.isEmpty()) {
-            maxArea = Math.max(maxArea, calculateAreaForHead(stack, length - 1));
+            maxArea = Math.max(maxArea, calculateAreaForHead(stack, length));
         }
 
         return maxArea;
@@ -49,7 +49,7 @@ public class LargestRectangleArea {
         else return target.peek().index;
     }
 
-    public static record HeightAndIndex(int height, int index) {
+    public record HeightAndIndex(int height, int index) {
 
     }
 
