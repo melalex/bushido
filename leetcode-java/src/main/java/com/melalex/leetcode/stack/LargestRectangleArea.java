@@ -4,58 +4,43 @@ import java.util.Stack;
 
 public class LargestRectangleArea {
 
-  private static final HeightAndIndex ZERO = new HeightAndIndex(-1, -1);
-
   public int largestRectangleArea(int[] heights) {
-    var stack = new Stack<HeightAndIndex>();
+    var stack = new Stack<Integer>();
     var length = heights.length;
     var maxArea = 0;
 
     for (var i = 0; i < length; i++) {
-      var heightAndIndex = new HeightAndIndex(heights[i], i);
-
-      while (!offerMonotonic(stack, heightAndIndex)) {
-        maxArea = Math.max(maxArea, calculateAreaForHead(stack, i));
+      while (!offerMonotonic(stack, heights, i)) {
+        maxArea = Math.max(maxArea, calculateAreaForHead(stack, heights, i));
       }
     }
 
     while (!stack.isEmpty()) {
-      maxArea = Math.max(maxArea, calculateAreaForHead(stack, length));
+      maxArea = Math.max(maxArea, calculateAreaForHead(stack, heights, length));
     }
 
     return maxArea;
   }
 
-  private int calculateAreaForHead(Stack<HeightAndIndex> target, int maxLen) {
+  private int calculateAreaForHead(Stack<Integer> target, int[] heights, int maxLen) {
     var head = target.pop();
     var prev = peekSafe(target);
 
-    System.out.println("Calculate area: " + head + ". Start - " + (prev.index + 1) + ", end - " + maxLen + ", area - " + (maxLen - prev.index - 1) * head.height);
-
-    return (maxLen - prev.index - 1) * head.height;
+    return (maxLen - prev - 1) * heights[head];
   }
 
-  private boolean offerMonotonic(Stack<HeightAndIndex> target, HeightAndIndex element) {
-    if (target.isEmpty() || target.peek().height < element.height) {
-      target.push(element);
+  private boolean offerMonotonic(Stack<Integer> target, int[] heights, int index) {
+    if (target.isEmpty() || heights[target.peek()] < heights[index]) {
+      target.push(index);
       return true;
     } else {
       return false;
     }
   }
 
-  private HeightAndIndex peekSafe(Stack<HeightAndIndex> target) {
-    if (target.isEmpty()) return ZERO;
+  private int peekSafe(Stack<Integer> target) {
+    if (target.isEmpty()) return -1;
     else return target.peek();
-  }
-
-  private HeightAndIndex popSafe(Stack<HeightAndIndex> target) {
-    if (target.isEmpty()) return ZERO;
-    else return target.pop();
-  }
-
-  public record HeightAndIndex(int height, int index) {
-
   }
 
   public static void main(String[] args) {
