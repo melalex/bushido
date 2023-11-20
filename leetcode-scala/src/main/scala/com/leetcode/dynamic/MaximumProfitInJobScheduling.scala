@@ -2,25 +2,6 @@ package com.leetcode.dynamic
 
 object MaximumProfitInJobScheduling {
 
-  //  def jobScheduling(startTime: Array[Int], endTime: Array[Int], profit: Array[Int]): Int = {
-  //    val cache = scala.collection.mutable.Map[List[Int], Int]()
-  //
-  //    def jobSchedulingInternal(jobs: List[Int]): Int =
-  //      cache.getOrElseUpdate(jobs, calculateSchedule(jobs))
-  //
-  //    def calculateSchedule(jobs: List[Int]) = jobs match {
-  //      case Nil => 0
-  //      case head :: next => math.max(
-  //        jobSchedulingInternal(next.filter(isNotOverlapping(head))) + profit(head),
-  //        jobSchedulingInternal(next)
-  //      )
-  //    }
-  //
-  //    def isNotOverlapping(jobA: Int)(jobB: Int): Boolean = (startTime(jobA) <= startTime(jobB) && endTime(jobA) <= startTime(jobB)) || (startTime(jobB) <= startTime(jobA) && endTime(jobB) <= startTime(jobA))
-  //
-  //    jobSchedulingInternal(List.range(0, startTime.length))
-  //  }
-
   def jobScheduling(startTime: Array[Int], endTime: Array[Int], profit: Array[Int]): Int = {
     val jobsCount = startTime.length
     val orderedJobs = Vector.range(0, jobsCount).sortBy(startTime)
@@ -32,8 +13,10 @@ object MaximumProfitInJobScheduling {
       else {
         val job = orderedJobs(jobIndex)
 
+        val next = findNext(jobIndex + 1, jobsCount - 1, endTime(job))
+
         val res = math.max(
-          jobSchedulingInternal(findNext(jobIndex + 1, jobsCount - 1, endTime(job))) + profit(job),
+          jobSchedulingInternal(next) + profit(job),
           jobSchedulingInternal(jobIndex + 1)
         )
 
@@ -52,7 +35,7 @@ object MaximumProfitInJobScheduling {
       val middleJob = orderedJobs(middleIndex)
 
       if (startTime(middleJob) >= endTime && startTime(orderedJobs(middleIndex - 1)) < endTime) middleIndex
-      else if (startTime(middleJob) > endTime) findNext(low, middleIndex - 1, endTime)
+      else if (startTime(middleJob) >= endTime) findNext(low, middleIndex - 1, endTime)
       else findNext(middleIndex + 1, high, endTime)
     }
 
@@ -60,8 +43,8 @@ object MaximumProfitInJobScheduling {
   }
 
   def main(args: Array[String]): Unit = {
-    println("Should be 120: " + jobScheduling(Array[Int](1, 2, 3, 3), Array[Int](3, 4, 5, 6), Array[Int](50, 10, 40, 70)))
     println("Should be 7: " + jobScheduling(Array[Int](1, 2, 2, 3), Array[Int](2, 5, 3, 4), Array[Int](3, 4, 1, 2)))
+    println("Should be 120: " + jobScheduling(Array[Int](1, 2, 3, 3), Array[Int](3, 4, 5, 6), Array[Int](50, 10, 40, 70)))
     println("Should be 150: " + jobScheduling(Array[Int](1, 2, 3, 4, 6), Array[Int](3, 5, 10, 6, 9), Array[Int](20, 20, 100, 70, 60)))
     println("Should be 6: " + jobScheduling(Array[Int](1, 1, 1), Array[Int](2, 3, 4), Array[Int](5, 6, 4)))
     println("Should be 63: " + jobScheduling(Array[Int](15, 44, 15, 47, 11, 18, 5, 41, 38, 25, 19, 25), Array[Int](33, 48, 20, 49, 37, 22, 32, 48, 39, 37, 38, 40), Array[Int](18, 19, 16, 1, 5, 12, 17, 7, 19, 9, 18, 9)))
