@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.CoinChange.coinChange
+import com.leetcode.CoinChange.coinChange
 
 class CoinChangeSpec extends TestSpec {
 

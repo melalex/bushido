@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.PalindromicSubstrings.countSubstrings
+import com.leetcode.PalindromicSubstrings.countSubstrings
 
 class PalindromicSubstringsSpec extends TestSpec {
 

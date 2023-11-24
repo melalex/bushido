@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.ValidAnagram.isAnagram
+import com.leetcode.ValidAnagram.isAnagram
 
 class ValidAnagramSpec extends TestSpec {
 

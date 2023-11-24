@@ -1,6 +1,6 @@
 package com.leetcode.advanced
 
-import com.leetcode.TestSpec
+import com.leetcode.{MedianFinder, TestSpec}
 
 class MedianFinderSpec extends TestSpec {
 

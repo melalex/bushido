@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
 import com.leetcode.TestSpec
-import com.leetcode.nonlinear.CourseSchedule.canFinish
+import com.leetcode.CourseSchedule.canFinish
 
 class CourseScheduleSpec extends TestSpec {
 

@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.ProductOfArrayExceptSelf.productExceptSelf
+import com.leetcode.ProductOfArrayExceptSelf.productExceptSelf
 
 class ProductOfArrayExceptSelfSpec extends TestSpec {
 

@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
-import com.leetcode.TestSpec
-import com.leetcode.nonlinear.TreeNode.{buildTree, deserialize, invertTree, isValidBST, kthSmallest, levelOrder, lowestCommonAncestor, maxPathSum, serialize}
+import com.leetcode.{TestSpec, TreeNode}
+import com.leetcode.TreeNode.{buildTree, deserialize, invertTree, isValidBST, kthSmallest, levelOrder, lowestCommonAncestor, maxPathSum, serialize}
 
 class TreeNodeSpec extends TestSpec {
 

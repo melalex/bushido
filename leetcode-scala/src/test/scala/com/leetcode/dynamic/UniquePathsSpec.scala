@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.UniquePaths.uniquePaths
+import com.leetcode.UniquePaths.uniquePaths
 
 class UniquePathsSpec extends TestSpec {
 

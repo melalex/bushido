@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.ValidParentheses.isValid
+import com.leetcode.ValidParentheses.isValid
 
 class ValidParenthesesSpec extends TestSpec {
 

@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.HouseRobber.rob
+import com.leetcode.HouseRobber.rob
 
 class HouseRobberSpec extends TestSpec {
 

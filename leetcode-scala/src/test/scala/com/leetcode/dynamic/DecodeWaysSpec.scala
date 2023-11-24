@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.DecodeWays.numDecodings
+import com.leetcode.DecodeWays.numDecodings
 
 class DecodeWaysSpec extends TestSpec {
 

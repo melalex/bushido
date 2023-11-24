@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.MergeIntervals.merge
+import com.leetcode.MergeIntervals.merge
 
 class MergeIntervalsSpec extends TestSpec {
 

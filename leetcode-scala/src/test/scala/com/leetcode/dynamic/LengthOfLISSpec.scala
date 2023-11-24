@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.LengthOfLIS.lengthOfLIS
+import com.leetcode.LengthOfLIS.lengthOfLIS
 
 class LengthOfLISSpec extends TestSpec {
 

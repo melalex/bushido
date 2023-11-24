@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.SearchInRotatedSortedArray.search
+import com.leetcode.SearchInRotatedSortedArray.search
 
 class SearchInRotatedSortedArraySpec extends TestSpec {
 

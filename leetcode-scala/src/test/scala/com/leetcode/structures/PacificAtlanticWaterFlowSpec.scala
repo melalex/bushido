@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.PacificAtlanticWaterFlow.pacificAtlantic
+import com.leetcode.PacificAtlanticWaterFlow.pacificAtlantic
 
 class PacificAtlanticWaterFlowSpec extends TestSpec {
 

@@ -1,6 +1,6 @@
 package com.leetcode.advanced
 
-import com.leetcode.TestSpec
+import com.leetcode.{TestSpec, Trie}
 
 class TrieSpec extends TestSpec {
 

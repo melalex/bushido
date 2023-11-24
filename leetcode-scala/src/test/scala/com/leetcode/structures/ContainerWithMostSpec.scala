@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.ContainerWithMostWater.maxArea
+import com.leetcode.ContainerWithMostWater.maxArea
 
 class ContainerWithMostSpec extends TestSpec {
 

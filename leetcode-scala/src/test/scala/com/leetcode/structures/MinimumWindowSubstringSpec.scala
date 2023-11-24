@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.MinimumWindowSubstring.minWindow
+import com.leetcode.MinimumWindowSubstring.minWindow
 
 class MinimumWindowSubstringSpec extends TestSpec {
 

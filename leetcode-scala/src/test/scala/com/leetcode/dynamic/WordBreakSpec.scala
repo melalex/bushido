@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.WordBreak.wordBreak
+import com.leetcode.WordBreak.wordBreak
 
 class WordBreakSpec extends TestSpec {
 

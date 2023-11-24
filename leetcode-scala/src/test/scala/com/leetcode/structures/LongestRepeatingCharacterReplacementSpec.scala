@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.LongestRepeatingCharacterReplacement.characterReplacement
+import com.leetcode.LongestRepeatingCharacterReplacement.characterReplacement
 
 class LongestRepeatingCharacterReplacementSpec extends TestSpec {
 

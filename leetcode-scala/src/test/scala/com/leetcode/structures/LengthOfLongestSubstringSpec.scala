@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
 import com.leetcode.TestSpec
-import com.leetcode.structures.LengthOfLongestSubstring.lengthOfLongestSubstring
+import com.leetcode.LengthOfLongestSubstring.lengthOfLongestSubstring
 
 class LengthOfLongestSubstringSpec extends TestSpec {
 

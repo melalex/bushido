@@ -1,7 +1,7 @@
 package com.leetcode.advanced
 
 import com.leetcode.TestSpec
-import com.leetcode.advanced.LongestConsecutiveSequence.longestConsecutive
+import com.leetcode.LongestConsecutiveSequence.longestConsecutive
 
 class LongestConsecutiveSequenceSpec extends TestSpec {
 

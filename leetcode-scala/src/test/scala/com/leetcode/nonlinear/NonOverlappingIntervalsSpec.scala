@@ -1,7 +1,7 @@
 package com.leetcode.nonlinear
 
 import com.leetcode.TestSpec
-import com.leetcode.nonlinear.NonOverlappingIntervals.eraseOverlapIntervals
+import com.leetcode.NonOverlappingIntervals.eraseOverlapIntervals
 
 class NonOverlappingIntervalsSpec extends TestSpec {
 

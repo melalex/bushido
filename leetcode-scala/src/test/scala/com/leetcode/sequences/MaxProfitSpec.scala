@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.MaxProfit.maxProfit
+import com.leetcode.MaxProfit.maxProfit
 
 class MaxProfitSpec extends TestSpec {
 

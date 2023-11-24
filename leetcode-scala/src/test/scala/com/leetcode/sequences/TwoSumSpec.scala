@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.TwoSum._
+import com.leetcode.TwoSum._
 
 class TwoSumSpec extends TestSpec {
 

@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.CombinationSum.combinationSum4
+import com.leetcode.CombinationSum.combinationSum4
 
 class CombinationSumSpec extends TestSpec {
 

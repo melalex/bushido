@@ -1,7 +1,7 @@
 package com.leetcode.sequences
 
 import com.leetcode.TestSpec
-import com.leetcode.sequences.MaxSubArray.maxSubArray
+import com.leetcode.MaxSubArray.maxSubArray
 
 class MaxSubArraySpec extends TestSpec {
 

@@ -1,6 +1,6 @@
 package com.leetcode.advanced
 
-import com.leetcode.TestSpec
+import com.leetcode.{TestSpec, WordDictionary}
 
 class WordDictionarySpec extends TestSpec {
 

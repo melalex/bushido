@@ -1,6 +1,6 @@
 package com.leetcode.nonlinear
 
-import com.leetcode.TestSpec
+import com.leetcode.{TestSpec, TopKFrequentElements}
 
 class TopKFrequentElementsSpec extends TestSpec{
 

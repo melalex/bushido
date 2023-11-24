@@ -1,7 +1,7 @@
 package com.leetcode.structures
 
-import com.leetcode.TestSpec
-import com.leetcode.structures.ListNode.{hasCycle, mergeKLists, removeNthFromEnd, toList}
+import com.leetcode.{ListNode, TestSpec}
+import com.leetcode.ListNode.{hasCycle, mergeKLists, removeNthFromEnd, toList}
 
 class ListNodeSpec extends TestSpec {
 

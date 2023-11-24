@@ -1,7 +1,7 @@
 package com.leetcode.advanced
 
 import com.leetcode.TestSpec
-import com.leetcode.advanced.WorldSearch.findWords
+import com.leetcode.WorldSearch.findWords
 
 class WorldSearchSpec extends TestSpec {
 

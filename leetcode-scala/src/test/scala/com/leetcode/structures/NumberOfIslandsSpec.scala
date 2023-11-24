@@ -1,6 +1,6 @@
 package com.leetcode.structures
 
-import com.leetcode.TestSpec
+import com.leetcode.{NumberOfIslands, TestSpec}
 
 class NumberOfIslandsSpec extends TestSpec {
 

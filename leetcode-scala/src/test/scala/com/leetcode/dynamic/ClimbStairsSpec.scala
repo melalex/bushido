@@ -1,7 +1,7 @@
 package com.leetcode.dynamic
 
 import com.leetcode.TestSpec
-import com.leetcode.dynamic.ClimbStairs.climbStairs
+import com.leetcode.ClimbStairs.climbStairs
 
 class ClimbStairsSpec extends TestSpec {
 
