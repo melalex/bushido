@@ -23,6 +23,6 @@ object DiameterOfBinaryTree {
   }
 
   def main(args: Array[String]): Unit = {
-    println(s"Should be 3: ${diameterOfBinaryTree(new TreeNode(1, new TreeNode(2 , new TreeNode(4), new TreeNode(5)), new TreeNode(3)))}")
+    println(s"Should be 3: ${diameterOfBinaryTree(new TreeNode(1, new TreeNode(2, new TreeNode(4), new TreeNode(5)), new TreeNode(3)))}")
   }
 }
