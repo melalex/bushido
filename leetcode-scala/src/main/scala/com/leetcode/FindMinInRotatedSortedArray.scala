@@ -3,22 +3,23 @@ package com.leetcode
 object FindMinInRotatedSortedArray {
 
   def findMin(nums: Array[Int]): Int = {
-    val last = nums(nums.length - 1)
+    var l = 0
+    var r = nums.length - 1
 
-    @inline
-    def mid(left: Int, right: Int): Int = left + (right - left) / 2
-
-    @scala.annotation.tailrec
-    def findPivot(left: Int, right: Int): Int = {
-      val prevVal = if (left == 0) last else nums(left - 1)
-      val leftVal = nums(left)
-      val rightVal = nums(right)
-
-      if (prevVal < leftVal) leftVal
-      else if (leftVal > rightVal) findPivot(mid(left, right), right)
-      else findPivot(0, left)
+    while (l < r) {
+      val m = (l + r) / 2
+      if (nums(m) < nums(r)) r = m
+      else l = m + 1
     }
 
-    findPivot(0, nums.length - 1)
+    nums(l)
+  }
+
+  def main(args: Array[String]): Unit = {
+//    println(findMin(Array(3, 4, 5, 1, 2)))
+    println(findMin(Array(4, 5, 6, 7, 0, 1, 2)))
+    println(findMin(Array(11, 13, 15, 17)))
+    println(findMin(Array(5, 1, 2, 3, 4)))
+    println(findMin(Array(5, 1, 2, 3, 4)))
   }
 }
