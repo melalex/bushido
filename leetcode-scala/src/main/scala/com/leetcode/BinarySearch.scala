@@ -1,6 +1,6 @@
 package com.leetcode
 
-class BinarySearch {
+object BinarySearch {
 
   def search(nums: Array[Int], target: Int): Int = {
     @scala.annotation.tailrec
