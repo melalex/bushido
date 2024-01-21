@@ -12,6 +12,14 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Write a Java program that takes standard input, where each line contains an email address eg.
+ * joeblogs@saldoaaps.com andrew.smith@gmail.com ...
+ * and outputs the 10 domains (or less if there aren't that many) that appear the most often with a count of the number of times it appears after each domain. eg.
+ * saldoaaps.com 2553 yahoo.com 1315 ...
+ * and up to 8 more lines.
+ * Please treat this exercise as you would with production code. Explain why your solution is optimal.
+ */
 public class TopNEmails {
 
   private static final String EOI = "0";
